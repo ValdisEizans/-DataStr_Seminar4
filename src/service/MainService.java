@@ -16,6 +16,9 @@ public class MainService {
 			System.out.println("----------------------------------------------------------------------------");
 			bstKoks.print();
 			
+			System.out.println("Vai eksiste 7: " + bstKoks.search(7));
+			System.out.println("Vai eksiste 13: " + bstKoks.search(13));
+			
 		}
 		catch (Exception e) {
 			System.out.println(e.getMessage());

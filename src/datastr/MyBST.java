@@ -67,6 +67,50 @@ public class MyBST<Ttype>{
 		}
 	}
 	
+	//meklesanas funkcija
+	public boolean search(Ttype element) throws Exception{
+		if(isEmpty()) {
+			throw new Exception("Koks ir tukss, nevar mekelet elementus!");
+		}
+		return searchHelper(rootNode, element);
+	}
+	
+	private boolean searchHelper(MyNode<Ttype> nodeTemp, Ttype element) {
+		if(nodeTemp != null) {
+			//ja sakrit, atgriez ka atrasts
+			if(nodeTemp.getElement().equals(element)) {
+				return true;
+			}
+			else {//ja nesakrit tad turpina meklet
+				if(((Comparable)element).compareTo(nodeTemp.getElement()) > 0 ) {//mekle pa labo pusi
+					if(nodeTemp.getRightChildNode() == null) {
+						//ja elements neeksiste
+						return false;
+					}
+					else {
+						return searchHelper(nodeTemp.getRightChildNode(),element);
+					}
+				}
+				else {//mekle pa kreiso pusi
+					if(nodeTemp.getLeftChildNode() == null) {
+						//ja elements neeksiste
+						return false;
+					}
+					else {
+						return searchHelper(nodeTemp.getLeftChildNode(),element);
+					}
+				}
+			}
+		}
+		return false;
+	}
+	
+	
+	
+	
+	
+	
+	
 	//print funkcija
 	public void print() throws Exception{
 		if(isEmpty()) {
@@ -92,9 +136,5 @@ public class MyBST<Ttype>{
 			}
 		}
 	}
-	
-	
-	
-	
 
 }
