@@ -1,6 +1,7 @@
 package service;
 
 import datastr.MyBST;
+import model.Patient;
 
 public class MainService {
 
@@ -19,6 +20,22 @@ public class MainService {
 		catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		
+		MyBST<Patient> bstPatients = new MyBST<Patient>();
+		try {
+			System.out.println("----------------------------DARBIBAS AR PACIENTIEM------------------------------------------------");
+			bstPatients.add(new Patient("Janis","Berzins",4));
+			bstPatients.add(new Patient("Liga","Eglite",2));
+			bstPatients.add(new Patient("Baiba","Kalnina",3));
+			bstPatients.add(new Patient("Juris","Nejaukais",5));
+			bstPatients.print();
+			System.out.println("----------------------------------------------------------------------------");
+			
+		}
+		catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
 	}
 
 }
