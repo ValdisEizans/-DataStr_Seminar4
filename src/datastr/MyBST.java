@@ -105,8 +105,86 @@ public class MyBST<Ttype>{
 		return false;
 	}
 	
+	//dzesanas funkcija
+	public void remove(Ttype element) throws Exception{
+		if(isEmpty()) {
+			throw new Exception("Koks ir tukšs, nevar dzest elementu!");
+		}
+		removeHelper(rootNode, element);
+	}
 	
-	
+	private void removeHelper(MyNode<Ttype> nodeTemp, Ttype element) {
+		if(nodeTemp != null) {
+			//ja sakrit, atgriez ka atrasts
+			if(nodeTemp.getElement().equals(element)) {
+				//visi 4 dzesanas gadijumi:
+				
+				//1. gadijums, ja elements ir lapa, nav neviena berna
+				if(nodeTemp.getLeftChildNode() == null && nodeTemp.getRightChildNode() == null) {
+					MyNode<Ttype> parentNode = nodeTemp.getParrentNode();
+					//janoskaidro, kura puse ir berns
+					if(((Comparable)nodeTemp.getElement()).compareTo(parentNode.getElement()) > 0 ) {//ja lielaks => labais berns
+						parentNode.setRightChildNode(null);
+					}
+					else {//ja mazaks => kreisais berns
+						parentNode.setLeftChildNode(null);
+					}
+				}
+				//2. gadijums, ja berns tikai kreisa puse
+				else if (nodeTemp.getLeftChildNode() != null && nodeTemp.getRightChildNode() == null) {
+					MyNode<Ttype> parentNode = nodeTemp.getParrentNode();
+					MyNode<Ttype> leftChildNode = nodeTemp.getLeftChildNode();
+					//vai dzesamais elements lielaks par savu vecaku
+					if(((Comparable)nodeTemp.getElement()).compareTo(parentNode.getElement()) > 0 ) {//ja lielaks => labais berns
+						parentNode.setLeftChildNode(leftChildNode);
+						leftChildNode.setParrentNode(parentNode);
+					}
+					else {
+						parentNode.setRightChildNode(leftChildNode);
+						leftChildNode.setParrentNode(parentNode);
+					}
+					
+				}
+				//3. gadijums, ja berns tikai laba puse
+				else if (nodeTemp.getLeftChildNode() == null && nodeTemp.getRightChildNode() != null) {
+					MyNode<Ttype> parentNode = nodeTemp.getParrentNode();
+					MyNode<Ttype> rightChildNode = nodeTemp.getRightChildNode();
+					//vai dzesamais elements lielaks par savu vecaku
+					if(((Comparable)nodeTemp.getElement()).compareTo(parentNode.getElement()) > 0 ) {//ja lielaks => labais berns
+						parentNode.setRightChildNode(rightChildNode);
+						rightChildNode.setParrentNode(parentNode);
+					}
+					else {
+						parentNode.setLeftChildNode(rightChildNode);
+						rightChildNode.setParrentNode(parentNode);
+					}
+				}
+				//4. gadijums, ja abi berni eksiste
+				else {
+					//TODO
+				}
+				
+				
+				
+				
+			}
+			else {//ja nesakrit tad turpina meklet
+				if(((Comparable)element).compareTo(nodeTemp.getElement()) > 0 ) {//mekle pa labo pusi
+					if(nodeTemp.getRightChildNode() != null) {
+						//ja elements eksiste
+						removeHelper(nodeTemp.getRightChildNode(), element);;
+					}
+				}
+				else {//mekle pa kreiso pusi
+					if(nodeTemp.getLeftChildNode() != null) {
+						//ja elements eksiste
+						removeHelper(nodeTemp.getLeftChildNode(), element);;
+					}
+				}
+			}
+		}
+
+	}
 	
 	
 	
