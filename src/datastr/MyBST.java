@@ -65,10 +65,35 @@ public class MyBST<Ttype>{
 				}
 			}
 		}
-		
-		
-		
 	}
+	
+	//print funkcija
+	public void print() throws Exception{
+		if(isEmpty()) {
+			throw new Exception("Koks ir tukss, nevar izdrukat!");
+		}
+		printHelper(rootNode);
+	}
+	
+	private void printHelper(MyNode<Ttype> nodeTemp) {
+		if(nodeTemp != null) {
+			System.out.println("P: " + nodeTemp.getElement());
+			//vai eksiste kreisais berns
+			if(nodeTemp.getLeftChildNode() != null) {
+				System.out.println("P: " + nodeTemp.getElement() + " L child: " + nodeTemp.getLeftChildNode().getElement());
+				//izpilda rekursivi funkciju uz kreisa berna
+				printHelper(nodeTemp.getLeftChildNode());
+			}
+			//vai eksiste labais berns
+			if(nodeTemp.getRightChildNode() != null) {
+				System.out.println("P: " + nodeTemp.getElement() + " R child: " + nodeTemp.getRightChildNode().getElement());
+				//izpilda rekursivi funkciju uz laba berna
+				printHelper(nodeTemp.getRightChildNode());
+			}
+		}
+	}
+	
+	
 	
 	
 
